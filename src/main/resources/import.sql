@@ -1,0 +1,1 @@
+insert into Worker(id, email, name, password) values ('admin', 'admin@teamforce', 'Administrador','admin')

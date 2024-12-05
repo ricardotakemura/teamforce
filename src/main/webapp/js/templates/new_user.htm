@@ -1,0 +1,22 @@
+<div id="new_user" class="box">
+	<h1>New Jedi</h1>
+	<form name="userForm" ng-submit="execute()">
+		<p>
+			<label for="usernameInput">ID: </label> <input type="text"
+				ng-model="username" id="usernameInput" maxlength="16">
+		</p>
+		<p>
+			<label for="nameInput">Name: </label> <input type="text"
+				ng-model="name" id="nameInput" maxlength="100">
+		</p>
+		<p>
+			<label for="emailInput">E-mail: </label> <input type="text"
+				ng-model="email" id="emailInput" maxlength="100">
+		</p>
+		<p>
+			<label for="passwdInput">Password: </label> <input type="password"
+				ng-model="password" id="passwdInput" maxlength="16">
+		</p>
+		<button type="submit">Join the force</button>
+	</form>
+</div>
