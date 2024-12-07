@@ -1,15 +1,15 @@
 <div id="login" class="box">
 	<h1>Team force</h1>
-	<form name="loginForm" ng-submit="execute()">
+	<form name="loginForm" ng-submit="$ctrl.login()">
 		<p>
 			<label for="nameInput">ID: </label> <input type="text"
-				ng-model="username" id="nameInput"  maxlength="16">
+				ng-model="$ctrl.username" id="nameInput"  maxlength="16">
 		</p>
 		<p>
 			<label for="passwdInput">Password: </label> <input type="password"
-				ng-model="password" id="passwdInput" maxlength="16">
+				ng-model="$ctrl.password" id="passwdInput" maxlength="16">
 		</p>
 		<button type="submit">Welcome</button>
-		<a href=#>New Jedi? Click me</a>
+		<a href="#!/teamforce/newuser">New Jedi? Click me</a>
 	</form>
 </div>

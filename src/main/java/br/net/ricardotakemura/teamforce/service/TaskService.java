@@ -20,7 +20,7 @@ public class TaskService {
 	@Inject
 	private WorkerRepository workerRepository;
 	
-	@Transactional(value = TxType.REQUIRED)
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public Task create(Task task) {
 		Date now = new Date();
 		task.setStatus(Status.OPEN);
@@ -32,7 +32,7 @@ public class TaskService {
 		return result;
 	}
 	
-	@Transactional(value = TxType.REQUIRED)
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public Task updateStatus(Long id, String status) {
 		Task result = taskRepository.updateStatus(id, Status.valueOf(status));
 		result.getWorkers().size();
@@ -40,7 +40,7 @@ public class TaskService {
 		return result;
 	}
 	
-	@Transactional(value = TxType.REQUIRED)
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public Task addWorker(Long taskId, String workerId) {
 		Worker worker = workerRepository.findById(workerId);
 		Task result = taskRepository.addWorker(taskId, worker);
@@ -49,7 +49,7 @@ public class TaskService {
 		return result;
 	}
 	
-	@Transactional(value = TxType.REQUIRED)
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public Task removeWorker(Long taskId, String workerId) {
 		Worker worker = workerRepository.findById(workerId);
 		Task result = taskRepository.removeWorker(taskId, worker);

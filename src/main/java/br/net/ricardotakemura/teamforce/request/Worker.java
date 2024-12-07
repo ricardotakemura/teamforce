@@ -1,43 +1,17 @@
-package br.net.ricardotakemura.teamforce.model;
+package br.net.ricardotakemura.teamforce.request;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
-import jakarta.json.bind.annotation.JsonbTransient;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "worker")
 public class Worker {
 
-	@Id
-	@Column(name = "id")
 	private String id;
 	
-	@Column(name = "email")
 	private String email;
 	
-	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "password")
 	private String password;
 	
-	@ManyToMany(targetEntity = Task.class)
-	@JoinTable(name = "worker_task")
-	@JsonbTransient
-	private Set<Task> tasks;
-	
-	public Worker() {
-		tasks = new HashSet<>();
-	}
-
 	public String getId() {
 		return id;
 	}
@@ -70,14 +44,6 @@ public class Worker {
 		this.password = password;
 	}
 
-	public Set<Task> getTasks() {
-		return tasks;
-	}
-
-	public void setTasks(Set<Task> tasks) {
-		this.tasks = tasks;
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(email, id, name, password);
@@ -94,10 +60,5 @@ public class Worker {
 		Worker other = (Worker) obj;
 		return Objects.equals(email, other.email) && Objects.equals(id, other.id) && Objects.equals(name, other.name)
 				&& Objects.equals(password, other.password);
-	}
-
-	@Override
-	public String toString() {
-		return "Worker [id=" + id + ", email=" + email + ", name=" + name + ", password=" + password + "]";
 	}
 }

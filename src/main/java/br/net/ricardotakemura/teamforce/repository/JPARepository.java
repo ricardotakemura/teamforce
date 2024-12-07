@@ -18,7 +18,8 @@ public class JPARepository<Entity, ID> {
 	}
 	
 	public Entity create(Entity entity) {
-		entityManager.persist(entity);
+		Entity newEntity = entityManager.merge(entity);
+		entityManager.persist(newEntity);
 		return entity;
 	}
 	
@@ -35,6 +36,8 @@ public class JPARepository<Entity, ID> {
 	}
 	
 	public void detach(Entity entity) {
-		entityManager.detach(entity);
+		if (entity != null) {
+			entityManager.detach(entity);
+		}
 	}
 }

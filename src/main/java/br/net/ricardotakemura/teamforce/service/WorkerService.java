@@ -24,7 +24,7 @@ public class WorkerService {
 		return null;
 	}
 	
-	@Transactional(value = TxType.REQUIRED)
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public Worker create(Worker worker) {
 		Worker result = workerRepository.create(worker);
 		workerRepository.detach(result);

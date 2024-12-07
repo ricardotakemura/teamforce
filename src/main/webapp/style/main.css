@@ -12,7 +12,7 @@ div.box {
 	transform: translate(-50%, -50%);  
 }
 
-div.box input {
+div.box input[type="password"], div.box input[type="text"] {
 	margin-top: -10px;
 	height: 30px;
 	width: 200px;
@@ -26,7 +26,7 @@ div.box h1 {
 
 div.box a {
 	position: relative;
-	margin-top: 10px;
+	top: 10px;
 	color: #fff;
 }
 
@@ -99,4 +99,28 @@ div#board div.card p.user {
 
 div#board div.card p a {
     color: #fff;	
+}
+
+footer.message {
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	opacity: 0.5;
+	background: #fff;
+}
+
+footer.message label {
+	margin-left: 10px;
+}
+
+footer.message button {
+	position: absolute;
+	top: 10px;
+	right: 0px;
+	margin-right: 20px;
+	border: 1px solid #000;
+	border-radius: 30px;
+	width: 30px;
+	height: 30px;
+	background: #fff;
 }

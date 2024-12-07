@@ -1,19 +1,21 @@
-angular.module('components', [])
-	.components('login', function() {
-		return {
-			restrict: 'E',
-			transclude: true,
-			scope: {},
-			controller: function($scope, $element) {
-				const user = encodeURIComponent($scope.username);
-				const passwd = encodeURIComponent($scope.password);
-				$scope.controller.login(user, passwd);
-			},
-			bindings: {
-				controller: '=',
-			},
-			template: 
-			``,
-			 replace: true,
-		}
+angular.module('components', ['controllers'])
+	.component('login', {
+		templateUrl: '../templates/login.htm',
+		controller: 'LoginController',
 	})
+	.component('newuser', {
+		templateUrl: '../templates/newuser.htm',
+		controller: 'UserController',
+	})
+	.component('board', {
+		templateUrl: '../templates/board.htm',
+	})
+	.component('addtask', {
+		templateUrl: '../templates/addtask.htm',
+	})
+	.component('taskuser', {
+		templateUrl: '../templates/taskuser.htm',
+	})
+	.component('card', {
+		templateUrl: '../templates/card.htm',
+	});

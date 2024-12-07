@@ -6,6 +6,9 @@
 <title>Sankhya - Team Force</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./js/angular.js"></script>
+<script src="./js/angular-route.js"></script>
+<script src="./js/utils.js"></script>
+<script src="./js/controllers.js"></script>
 <script src="./js/components.js"></script>
 <script src="./js/teamforce.js"></script>
 <link rel="stylesheet" href="./style/normalize.min.css">
@@ -13,13 +16,16 @@
 <link rel="shortcut icon" href="./images/favicon.ico"
 	type="image/x-icon" />
 </head>
-<body>
+<body ng-app>
 	<header>
 		<img class="logo" src="./images/logo.png" alt="Logo" title="Logo" />
 	</header>
 	<div class="wrapper">
-		<div class="content">
+		<div class="content" ng-view>
 		</div>
 	</div>
+	<footer class="message" ng-hide="hideMessage">
+		<p><label id="message">{{message}}</label><button ng-click="hideMessage=true">X</button></p>
+	</footer>
 </body>
 </html>
