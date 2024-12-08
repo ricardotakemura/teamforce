@@ -1,56 +1,86 @@
-<div ng-init="$crtl.init()">
+<div class="mainboard" ng-init="$crtl.init()">
 	<div id="board">
-		<div id="open" class="column ui-widget-header">
+		<div id="open" class="column">
 			<p>
 				<label>OPEN</label>
 				<button ng-click="showAddTask=true">+</button>
 			</p>
-			<div ng-repeat="task in tasks | filter:{ status: 'OPEN' }" id="{{task.id}}" class="card ui-widget-content">
+			<div ng-repeat="task in tasks | filter:{ status: 'OPEN' }"
+				ng-mousemove="$ctrl.move($event)"
+				ng-mousedown="$ctrl.drag($event)"
+				ng-mouseup="$ctrl.drop($event)" 
+				id="task_{{task.id}}"
+				class="{{task.status | lowercase}}">
 				<card type="task.type" description="task.description"
 					worker="task.worker.name" on-set-user="$ctrl.chooseWorker(task.id)"></card>
 			</div>
 		</div>
-		<div id="work" class="column ui-widget-header">
+		<div id="work" class="column">
 			<p>
 				<label>WORK</label>
 			</p>
-			<div ng-repeat="task in tasks | filter:{ status: 'WORK' }" id="{{task.id}}" class="card ui-widget-content">
+			<div ng-repeat="task in tasks | filter:{ status: 'WORK' }"
+				ng-mousemove="$ctrl.move($event)"
+				ng-mousedown="$ctrl.drag($event)"
+				ng-mouseup="$ctrl.drop($event)"
+				id="task_{{task.id}}"
+				class="{{task.status | lowercase}}">
 				<card type="task.type" description="task.description"
 					worker="task.worker.name" on-set-user="$ctrl.chooseWorker(task.id)"></card>
 			</div>
 		</div>
-		<div id="code_review" class="column ui-widget-header">
+		<div id="code_review" class="column">
 			<p>
 				<label>CODE REVIEW</label>
 			</p>
-			<div ng-repeat="task in tasks | filter:{ status: 'CODE_REVIEW' }" id="{{task.id}}" class="card ui-widget-content">
+			<div ng-repeat="task in tasks | filter:{ status: 'CODE_REVIEW' }"
+				ng-mousemove="$ctrl.move($event)"
+				ng-mousedown="$ctrl.drag($event)"
+				ng-mouseup="$ctrl.drop($event)"
+				id="task_{{task.id}}"
+				class="{{task.status | lowercase}}">
 				<card type="task.type" description="task.description"
-					worker="task.worker.nam" on-set-user="$ctrl.chooseWorker(task.id)"></card>
+					worker="task.worker.name" on-set-user="$ctrl.chooseWorker(task.id)"></card>
 			</div>
 		</div>
-		<div id="test" class="column ui-widget-header">
+		<div id="test" class="column">
 			<p>
 				<label>TEST</label>
 			</p>
-			<div ng-repeat="task in tasks | filter:{ status: 'TEST' }" id="{{task.id}}" class="card ui-widget-content">
+			<div ng-repeat="task in tasks | filter:{ status: 'TEST' }" id="task_{{task.id}}"
+				ng-mousemove="$ctrl.move($event)"
+				ng-mousedown="$ctrl.drag($event)"
+				ng-mouseup="$ctrl.drop($event)" 
+				id="task_{{task.id}}"
+				class="{{task.status | lowercase}}">
 				<card type="task.type" description="task.description"
 					worker="task.worker.name" on-set-user="$ctrl.chooseWorker(task.id)"></card>
 			</div>
 		</div>
-		<div id="deploy" class="column ui-widget-header">
+		<div id="deploy" class="column">
 			<p>
 				<label>DEPLOY</label>
 			</p>
-			<div ng-repeat="task in tasks | filter:{ status: 'DEPLOY' }" id="{{task.id}}" class="card ui-widget-content">
+			<div ng-repeat="task in tasks | filter:{ status: 'DEPLOY' }"
+				ng-mousemove="$ctrl.move($event)"
+				ng-mousedown="$ctrl.drag($event)"
+				ng-mouseup="$ctrl.drop($event)" 
+				id="task_{{task.id}}"
+				class="{{task.status | lowercase}}">
 				<card type="task.type" description="task.description"
 					worker="task.worker.name" on-set-user="$ctrl.chooseWorker(task.id)"></card>
 			</div>
 		</div>
-		<div id="close" class="column ui-widget-header">
+		<div id="close" class="column">
 			<p>
 				<label>CLOSE</label>
 			</p>
-			<div ng-repeat="task in tasks | filter:{ status: 'CLOSE' }" id="{{task.id}}" class="card ui-widget-content">
+			<div ng-repeat="task in tasks | filter:{ status: 'CLOSE' }"
+				ng-mousemove="$ctrl.move($event)"
+				ng-mousedown="$ctrl.drag($event)"
+				ng-mouseup="$ctrl.drop($event)"
+				id="task_{{task.id}}"
+				class="{{task.status | lowercase}}">
 				<card type="task.type" description="task.description"
 					worker="task.worker.name" on-set-user="$ctrl.chooseWorker(task.id)"></card>
 			</div>

@@ -20,6 +20,6 @@ angular.module("components", ["controllers"])
 			type: "<",
 			description: "<",
 			worker: "<",
-			onSetUser: "&", 
+			onSetUser: "&",
 		},
 	});
