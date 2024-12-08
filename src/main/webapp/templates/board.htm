@@ -1,22 +1,73 @@
-<div id="board">
-	<div id="open" class="column">
-		<p>
-			OPEN (<a href=#>Add Task</a>)
+<div ng-init="$crtl.init()">
+	<div id="board">
+		<div id="open" class="column">
+			<p>
+				<label>OPEN</label>
+				<button ng-click="$ctrl.showAddTask=true">+</button>
+			</p>
+		</div>
+		<div id="work" class="column">
+			<p>
+				<label>WORK</label>
+			</p>
+		</div>
+		<div id="code_review" class="column">
+			<p>
+				<label>CODE REVIEW</label>
+			</p>
+		</div>
+		<div id="test" class="column">
+			<p>
+				<label>TEST</label>
+			</p>
+		</div>
+		<div id="deploy" class="column">
+			<p>
+				<label>DEPLOY</label>
+			</p>
+		</div>
+		<div id="close" class="column">
+			<p>
+				<label>CLOSE</label>
+			</p>
+		</div>
+	</div>
+	<div id="add_task" class="box" ng-hide="!$ctrl.showAddTask">
+		<p class="title">
+			<label>New force</label>
+			<button ng-click="$ctrl.showAddTask=false">X</button>
 		</p>
+		<form name="taskForm" ng-submit="$ctrl.addTask()">
+			<p>
+				<label for="typeInput">Type: </label> <select ng-model="$ctrl.type"
+					id="typeInput">
+					<option selected value="BUG">BUG</option>
+					<option value="ANALYSIS">ANALYSIS</option>
+					<option value="FEATURE">FEATURE</option>
+				</select>
+			</p>
+			<p>
+				<label for="descriptionInput">Description: </label>
+				<textarea cols="30" rows="5" ng-model="$ctrl.description"
+					id="descriptionInput">></textarea>
+			</p>
+			<button type="submit">Do or do not</button>
+		</form>
 	</div>
-	<div id="work" class="column">
-		<p>WORK</p>
-	</div>
-	<div id="code_review" class="column">
-		<p>CODE REVIEW</p>
-	</div>
-	<div id="test" class="column">
-		<p>TEST</p>
-	</div>
-	<div id="deploy" class="column">
-		<p>DEPLOY</p>
-	</div>
-	<div id="close" class="column">
-		<p>CLOSE</p>
+	<div id="task_user" class="box"
+		ng-hide="!$rootScope.showTaskUser">
+		<p class="title">
+			<label>Choose the jedi</label>
+			<button ng-click="$rootScope.showTaskUser=false">X</button>
+		</p>
+		<form name="taskUserForm" ng-submit="$ctrl.saveUserInTask()">
+			<p>
+				<label for="userInput">User: </label> <select ng-model="$ctrl.user"
+					id="userInput">
+					<option value="rt">Ricardo Takemura</option>
+				</select>
+			</p>
+			<button type="submit">Join</button>
+		</form>
 	</div>
 </div>

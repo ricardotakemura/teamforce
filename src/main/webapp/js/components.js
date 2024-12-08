@@ -9,12 +9,7 @@ angular.module('components', ['controllers'])
 	})
 	.component('board', {
 		templateUrl: '../templates/board.htm',
-	})
-	.component('addtask', {
-		templateUrl: '../templates/addtask.htm',
-	})
-	.component('taskuser', {
-		templateUrl: '../templates/taskuser.htm',
+		controller: 'BoardController',
 	})
 	.component('card', {
 		templateUrl: '../templates/card.htm',

@@ -16,6 +16,10 @@ angular.module('teamForceApp', ['ngRoute', 'components', 'controllers'])
    		}
   	])
 	.run(function($location, $rootScope, $route) {
+		$rootScope.showMessage = function(msg) {
+			$rootScope.hideMessage = false;
+			$rootScope.message = msg;
+		}
 		$rootScope.hideMessage = true;
 		$rootScope.$on('$locationChangeStart', function() {
 			const nextPath = $location.path();

@@ -1,4 +1,4 @@
-<div id="login" class="box">
+<div id="login" class="box" ng-init="$ctrl.init()">
 	<h1>Team force</h1>
 	<form name="loginForm" ng-submit="$ctrl.login()">
 		<p>
@@ -10,6 +10,6 @@
 				ng-model="$ctrl.password" id="passwdInput" maxlength="16">
 		</p>
 		<button type="submit">Welcome</button>
-		<a href="#!/teamforce/newuser">New Jedi? Click me</a>
+		<a href="#!/teamforce/newuser">New jedi? Click here</a>
 	</form>
 </div>

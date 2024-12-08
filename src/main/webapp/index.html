@@ -18,14 +18,22 @@
 </head>
 <body ng-app>
 	<header>
-		<img class="logo" src="./images/logo.png" alt="Logo" title="Logo" />
+		<p id="logo">
+			<a href="#"><img class="logo" src="./images/logo.png" alt="Logo"
+				title="Logo" /></a>
+		</p>
+		<p id="user" ng-if="user.name != null">
+			<img src="./images/user.png" width="56" height="56"></img> <label>{{user.name}}</label>
+		</p>
 	</header>
 	<div class="wrapper">
-		<div class="content" ng-view>
-		</div>
+		<div class="content" ng-view></div>
 	</div>
-	<footer class="message" ng-hide="hideMessage">
-		<p><label id="message">{{message}}</label><button ng-click="hideMessage=true">X</button></p>
+	<footer class="message" ng-hide="hideMessage==true">
+		<p>
+			<label id="message">{{message}}</label>
+			<button ng-click="hideMessage=true">X</button>
+		</p>
 	</footer>
 </body>
 </html>
