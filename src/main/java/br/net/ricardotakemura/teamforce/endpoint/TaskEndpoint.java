@@ -1,6 +1,5 @@
 package br.net.ricardotakemura.teamforce.endpoint;
 
-import java.net.URI;
 import java.util.List;
 
 import br.net.ricardotakemura.teamforce.model.Task;
@@ -60,8 +59,8 @@ public class TaskEndpoint {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createTask(Task task) {
-    	taskService.create(task);
-    	return Response.created(URI.create("/task")).build();
+    	Task result = taskService.create(task);
+    	return Response.ok(result).build();
     }
 
 }

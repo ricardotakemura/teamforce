@@ -5,6 +5,7 @@ import java.util.Date;
 import br.net.ricardotakemura.teamforce.model.Task;
 import br.net.ricardotakemura.teamforce.model.Task.Status;
 import br.net.ricardotakemura.teamforce.model.Worker;
+import br.net.ricardotakemura.teamforce.repository.JPARepository;
 import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
@@ -18,18 +19,24 @@ public class TaskRepository extends JPARepository<Task, Long> {
 		Task task = entityManager.find(Task.class, id);
 		task.setUpdateAt(new Date());
 		task.setStatus(status);
-		return entityManager.merge(task);
+		entityManager.merge(task);
+		entityManager.flush();
+		return task;
 	}
 	
-	public Task addWorker(Long id, Worker worker) {
+	public Task updateWorker(Long id, Worker worker) {
 		Task task = entityManager.find(Task.class, id);
-		task.getWorkers().add(worker);
-		return entityManager.merge(task);
+		task.setWorker(worker);
+		entityManager.merge(task);
+		entityManager.flush();
+		return task;
 	}
 	
 	public Task removeWorker(Long id, Worker worker) {
 		Task task = entityManager.find(Task.class, id);
-		task.getWorkers().remove(worker);
-		return entityManager.merge(task);
+		task.setWorker(null);
+		entityManager.merge(task);
+		entityManager.flush();
+		return task;
 	}
 }

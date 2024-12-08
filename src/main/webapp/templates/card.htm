@@ -1,11 +1,11 @@
 <div class="card">
-	<p class="title">
-		<label>BUG</label>
+	<p class="title {{$ctrl.type | lowercase}}">
+		<label>{{$ctrl.type}}</label>
 	</p>
 	<p>
-		Super tarefa de campo</label>
+		<label>{{$ctrl.description}}</label>
 	</p>
-	<p class="user">
-		<a href="">Add User</a>
+	<p class="user" ng-click="$ctrl.onSetUser()">
+		<img src="./images/user.png" height="36" width="36"/>&nbsp;<label>{{($ctrl.worker || "No jedi").substring(0, 15)}}</label>
 	</p>
 </div>

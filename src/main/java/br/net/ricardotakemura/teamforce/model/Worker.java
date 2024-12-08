@@ -4,17 +4,20 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import br.net.ricardotakemura.teamforce.model.EntityBean;
+
 import jakarta.json.bind.annotation.JsonbTransient;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "worker")
-public class Worker {
+public class Worker implements EntityBean<String> {
 
 	@Id
 	@Column(name = "id")
@@ -29,8 +32,11 @@ public class Worker {
 	@Column(name = "password")
 	private String password;
 	
-	@ManyToMany(targetEntity = Task.class)
-	@JoinTable(name = "worker_task")
+	@OneToMany(targetEntity = Task.class,
+			mappedBy = "worker", 
+			orphanRemoval = true,
+			cascade = CascadeType.ALL,
+			fetch = FetchType.LAZY)
 	@JsonbTransient
 	private Set<Task> tasks;
 	

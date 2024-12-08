@@ -1,7 +1,10 @@
 package br.net.ricardotakemura.teamforce.service;
 
+import java.util.List;
+
 import br.net.ricardotakemura.teamforce.model.Worker;
 import br.net.ricardotakemura.teamforce.repository.WorkerRepository;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -22,6 +25,13 @@ public class WorkerService {
 			return worker;
 		}
 		return null;
+	}
+
+	@Transactional(value = TxType.SUPPORTS)
+	public List<Worker> getWorkers() {
+		List<Worker> workers = workerRepository.findAll();
+		workers.forEach(workerRepository::detach);
+		return workers;
 	}
 	
 	@Transactional(value = TxType.REQUIRES_NEW)

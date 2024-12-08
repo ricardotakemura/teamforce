@@ -1,41 +1,65 @@
 <div ng-init="$crtl.init()">
 	<div id="board">
-		<div id="open" class="column">
+		<div id="open" class="column ui-widget-header">
 			<p>
 				<label>OPEN</label>
-				<button ng-click="$ctrl.showAddTask=true">+</button>
+				<button ng-click="showAddTask=true">+</button>
 			</p>
+			<div ng-repeat="task in tasks | filter:{ status: 'OPEN' }" id="{{task.id}}" class="card ui-widget-content">
+				<card type="task.type" description="task.description"
+					worker="task.worker.name" on-set-user="$ctrl.chooseWorker(task.id)"></card>
+			</div>
 		</div>
-		<div id="work" class="column">
+		<div id="work" class="column ui-widget-header">
 			<p>
 				<label>WORK</label>
 			</p>
+			<div ng-repeat="task in tasks | filter:{ status: 'WORK' }" id="{{task.id}}" class="card ui-widget-content">
+				<card type="task.type" description="task.description"
+					worker="task.worker.name" on-set-user="$ctrl.chooseWorker(task.id)"></card>
+			</div>
 		</div>
-		<div id="code_review" class="column">
+		<div id="code_review" class="column ui-widget-header">
 			<p>
 				<label>CODE REVIEW</label>
 			</p>
+			<div ng-repeat="task in tasks | filter:{ status: 'CODE_REVIEW' }" id="{{task.id}}" class="card ui-widget-content">
+				<card type="task.type" description="task.description"
+					worker="task.worker.nam" on-set-user="$ctrl.chooseWorker(task.id)"></card>
+			</div>
 		</div>
-		<div id="test" class="column">
+		<div id="test" class="column ui-widget-header">
 			<p>
 				<label>TEST</label>
 			</p>
+			<div ng-repeat="task in tasks | filter:{ status: 'TEST' }" id="{{task.id}}" class="card ui-widget-content">
+				<card type="task.type" description="task.description"
+					worker="task.worker.name" on-set-user="$ctrl.chooseWorker(task.id)"></card>
+			</div>
 		</div>
-		<div id="deploy" class="column">
+		<div id="deploy" class="column ui-widget-header">
 			<p>
 				<label>DEPLOY</label>
 			</p>
+			<div ng-repeat="task in tasks | filter:{ status: 'DEPLOY' }" id="{{task.id}}" class="card ui-widget-content">
+				<card type="task.type" description="task.description"
+					worker="task.worker.name" on-set-user="$ctrl.chooseWorker(task.id)"></card>
+			</div>
 		</div>
-		<div id="close" class="column">
+		<div id="close" class="column ui-widget-header">
 			<p>
 				<label>CLOSE</label>
 			</p>
+			<div ng-repeat="task in tasks | filter:{ status: 'CLOSE' }" id="{{task.id}}" class="card ui-widget-content">
+				<card type="task.type" description="task.description"
+					worker="task.worker.name" on-set-user="$ctrl.chooseWorker(task.id)"></card>
+			</div>
 		</div>
 	</div>
-	<div id="add_task" class="box" ng-hide="!$ctrl.showAddTask">
+	<div id="add_task" class="box" ng-hide="!showAddTask">
 		<p class="title">
 			<label>New force</label>
-			<button ng-click="$ctrl.showAddTask=false">X</button>
+			<button ng-click="showAddTask=false">X</button>
 		</p>
 		<form name="taskForm" ng-submit="$ctrl.addTask()">
 			<p>
@@ -54,17 +78,16 @@
 			<button type="submit">Do or do not</button>
 		</form>
 	</div>
-	<div id="task_user" class="box"
-		ng-hide="!$rootScope.showTaskUser">
+	<div id="task_user" class="box" ng-hide="!showTaskUser">
 		<p class="title">
 			<label>Choose the jedi</label>
-			<button ng-click="$rootScope.showTaskUser=false">X</button>
+			<button ng-click="showTaskUser=false">X</button>
 		</p>
-		<form name="taskUserForm" ng-submit="$ctrl.saveUserInTask()">
+		<form name="taskUserForm" ng-submit="$ctrl.saveWorkerInTask()">
 			<p>
-				<label for="userInput">User: </label> <select ng-model="$ctrl.user"
-					id="userInput">
-					<option value="rt">Ricardo Takemura</option>
+				<label for="userInput">User: </label> <select
+					ng-model="$ctrl.workerId" id="userInput">
+					<option ng-repeat="worker in workers" ng-value="worker.id">{{worker.name}}</option>
 				</select>
 			</p>
 			<button type="submit">Join</button>

@@ -2,6 +2,7 @@ package br.net.ricardotakemura.teamforce.endpoint;
 
 
 import java.net.URI;
+import java.util.List;
 
 import br.net.ricardotakemura.teamforce.model.Worker;
 import br.net.ricardotakemura.teamforce.service.WorkerService;
@@ -31,6 +32,13 @@ public class WorkerEndpoint {
     		return Response.ok(result).build();
     	}
     	return Response.status(Status.FORBIDDEN).build();
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getWorkers() {
+    	List<Worker> workers = workerService.getWorkers();
+    	return Response.ok(workers).build();
     }
     
     @POST

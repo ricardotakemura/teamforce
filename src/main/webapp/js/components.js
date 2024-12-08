@@ -1,16 +1,25 @@
-angular.module('components', ['controllers'])
-	.component('login', {
-		templateUrl: '../templates/login.htm',
-		controller: 'LoginController',
+angular.module("components", ["controllers"])
+	.component("login", {
+		templateUrl: "../templates/login.htm",
+		controller: "LoginController",
 	})
-	.component('newuser', {
-		templateUrl: '../templates/newuser.htm',
-		controller: 'UserController',
+	.component("newuser", {
+		templateUrl: "../templates/newuser.htm",
+		controller: "UserController",
 	})
-	.component('board', {
-		templateUrl: '../templates/board.htm',
-		controller: 'BoardController',
+	.component("board", {
+		templateUrl: "../templates/board.htm",
+		controller: "BoardController",
 	})
-	.component('card', {
-		templateUrl: '../templates/card.htm',
+	.component("card", {
+		templateUrl: "../templates/card.htm",
+		require: {
+			boardController: "^board",
+		},
+		bindings: {
+			type: "<",
+			description: "<",
+			worker: "<",
+			onSetUser: "&", 
+		},
 	});

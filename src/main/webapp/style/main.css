@@ -1,5 +1,5 @@
 html {
-	background: #223344;
+	background: #234;
 }
 
 p#logo {
@@ -14,7 +14,7 @@ p#user {
 }
 
 p#user img {
-	border: 1px solid #000;
+	border: 1px solid #234;
 	border-radius: 36px;
 }
 
@@ -26,7 +26,7 @@ p#user label {
 }
 
 div.box {
-	background: #223344;
+	background: #234;
 	border: 2px solid #fff;
 	position: absolute;
 	top: 50%;
@@ -39,7 +39,7 @@ div.box input[type="password"], div.box input[type="text"] {
 	margin-top: -10px;
 	height: 30px;
 	width: 200px;
-	border: 1px solid #003333;
+	border: 1px solid #234;
 }
 
 div.box h1 {
@@ -67,30 +67,32 @@ div.box button {
 	width: 100%;
 	height: 50px;
 	border: 1px solid #fff;
-	background: #003333;
+	background: #033;
 }
 
 div.box p.title {
 	height: 36px;
-	background: #00AA00;
+	background: #0A0;
 	margin: -20px -20px 0 -20px;
 }
 
 div.box p.title label {
 	color: #234;
 	margin-top: 10px;
+	font-weight: bold;
 }
 
 div.box p.title button {
 	float: right;
 	margin-right: 9px;
-	border: 0;
+	border: none;
 	border-radius: 30px;
 	width: 24px;
 	height: 24px;
-	background: #003333;
+	background: #033;
 	color: #fff;
 	margin-top: 6px;
+	padding-right: 5px;
 }
 
 div#board {
@@ -106,8 +108,8 @@ div#board {
 div#board div.column p {
 	margin: 0; height : 36px;
 	text-align: center;
-	background: #00AA00;
-	color: #223344;
+	background: #0A0;
+	color: #234;
 	height: 36px;
 }
 
@@ -118,7 +120,7 @@ div#board div.column p label {
 
 div#board div.column p button {
 	color: #fff;
-	background: #234;
+	background: #033;
 	border-radius: 36px;
 	height: 24px;
 	width: 24px;
@@ -137,25 +139,53 @@ div#board div.column {
 }
 
 div#board div.card {
-	background: none;
+	background: #ccc;
 	border: 1px solid #fff;
-	height: 16.5%;
-	width: 228px;
+	height: 180px;
+	width: 100%;
 }
 
 div#board div.card p {
 	background: none;
-	color: #fff;
+	color: #234;
 }
 
 div#board div.card p.title {
-	background: #ff0000;
+	color: #234;
 	border-bottom: 1px solid #fff;
+}
+
+div#board div.card p.bug {
+	background: #f00;
+}
+
+div#board div.card p.feature {
+	background: #0f0;
+}
+
+div#board div.card p.analysis {
+	background: #00f;
 }
 
 div#board div.card p.user {
 	position: relative;
-	top: 90px;
+	background: none;
+	top: 60px;
+	text-align: left;
+}
+
+div#board div.card p.user label {
+	top: -16px;
+	color: #234;
+	font-weight: bold;
+	white-space: nowrap;
+ 	overflow: hidden;
+ 	text-overflow: ellipsis;
+}
+
+div#board div.card p.user img {
+	border-radius: 36px;
+	margin: 5px;
 }
 
 div#board div.card p a {
@@ -163,7 +193,7 @@ div#board div.card p a {
 }
 
 footer.message {
-	position: absolute;
+	position: fixed;
 	bottom: 0px;
 	width: 100%;
 	opacity: 0.5;
@@ -180,10 +210,10 @@ footer.message button {
 	top: 10px;
 	right: 0px;
 	margin-right: 20px;
-	border: 1px solid #000;
+	border: none;
 	border-radius: 30px;
 	width: 30px;
 	height: 30px;
-	background: #003333;
+	background: #234;
 	color: #fff;
 }

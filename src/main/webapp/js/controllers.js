@@ -1,5 +1,5 @@
-angular.module('controllers', [])
-	.controller('LoginController', ['$scope', '$rootScope', '$http', '$location', function($scope, $rootScope, $http, $location) {
+angular.module("controllers", [])
+	.controller("LoginController", ["$scope", "$rootScope", "$http", "$location", function($scope, $rootScope, $http, $location) {
 		this.init = function() {
 			$rootScope.hideMessage = true;
 			$rootScope.user = null;
@@ -14,7 +14,7 @@ angular.module('controllers', [])
 				.then(function(response) {
 					$rootScope.user = response.data;
 					$rootScope.hideMessage = true;
-					$location.path('/teamforce/board', false);
+					$location.path("/teamforce/board", false);
 				})
 				.catch(function(error) {
 					console.error(error);
@@ -24,7 +24,7 @@ angular.module('controllers', [])
 
 		this.init();
 	}])
-	.controller('UserController', ['$scope', '$rootScope', '$http', '$location', function($scope, $rootScope, $http, $location) {
+	.controller("UserController", ["$scope", "$rootScope", "$http", "$location", function($scope, $rootScope, $http, $location) {
 		this.init = function() {
 			$rootScope.hideMessage = true;
 			$rootScope.user = null;
@@ -32,7 +32,7 @@ angular.module('controllers', [])
 
 		this.save = function() {
 			if (_s.anyBlanks([this.id, this.password, this.name, this.email])) {
-				$rootScope.showMessage("I think missing anything...");
+				$rootScope.showMessage(`I think missing anything...`);
 				return;
 			}
 			if (this.id.length < 4) {
@@ -56,7 +56,7 @@ angular.module('controllers', [])
 			$http.post(`/teamforce/worker`, data)
 				.then(function() {
 					$rootScope.hideMessage = true;
-					$location.path('/teamforce/login', false);
+					$location.path("/teamforce/login", false);
 				})
 				.catch(function(error) {
 					console.error(error);
@@ -66,12 +66,35 @@ angular.module('controllers', [])
 
 		this.init();
 	}])
-	.controller('BoardController', ['$scope', '$rootScope', '$http', '$location', function($scope, $rootScope, $http, $location) {
+	.controller("BoardController", ["$scope", "$rootScope", "$http", "$location", function($scope, $rootScope, $http, $location) {
 		this.init = function() {
 			$rootScope.hideMessage = true;
-			this.showAddTask = false;
-			this.showTaskUser = false;
+			$scope.showAddTask = false;
+			$scope.showTaskUser = false;
+			$scope.tasks = [];
+			$scope.workers = [];
+			$http.get("/teamforce/task")
+				.then(function(response) {
+					$scope.tasks = response.data;
+				})
+				.catch(function(error) {
+					console.error(error);
+					$rootScope.showMessage("Not loading, tasks are...");
+				});
+			$http.get("/teamforce/worker")
+				.then(function(response) {
+					$scope.workers = response.data;
+				})
+				.catch(function(error) {
+					$rootScope.showMessage("Not loading, workers are...");
+					console.error(error);
+				});
 		};
+		
+		this.chooseWorker = function(taskId) {
+			$scope.showTaskUser = true;
+			$scope.taskId = taskId;
+		}
 	
 		this.addTask = function() {
 			if (_s.anyBlanks([this.type, this.description])) {
@@ -82,40 +105,64 @@ angular.module('controllers', [])
 				$rootScope.showMessage("Short, the description is...");
 				return;
 			}
+			if (this.description.length > 100) {
+				$rootScope.showMessage("Large, the description is...");
+				return;
+			}
 			const data = JSON.stringify({
 				type: this.type,
 				description: this.description,
 			});
-			const self = this;
-			$http.post(`/teamforce/task`, data)
+			$http.post("/teamforce/task", data)
 				.then(function(response) {
+					const task = response.data;
+					$scope.tasks.push(task);
+					$scope.showAddTask = false;
 					$rootScope.showMessage("Task force created...");
-					self.showAddTask = false;
 				})
 				.catch(function(error) {
 					console.error(error);
 					$rootScope.showMessage("No task force created...");
 				});
 		};
-		
-		this.saveUserInTask = function() {
-			if (_s.isBlank(this.user)) {
+
+		this.saveTaskStatus = function() {
+			if (_s.anyBlanks([this.status, this.task])) {
 				$rootScope.showMessage("I think missing anything...");
 				return;				
 			}
-			this.showTaskUser = false;
-			/*
-			$http.get(`/teamforce/worker/login?user=${this.username}&passwd=${this.password}`)
-				.then(function(response) {
-					$rootScope.user = response.data;
-					$rootScope.hideMessage = true;
-					$location.path('/teamforce/board', false);
+			$http.patch(`/teamforce/task/${this.task}/status/${this.status}`)
+				.then(function() {
+					$rootScope.showMessage("Welcome to the next step!");
 				})
 				.catch(function(error) {
 					console.error(error);
-					$rootScope.showMessage("You haven't the force...");
+					$rootScope.showMessage("The task don't to the next step...");
 				});
-			*/
+		};
+
+		this.saveWorkerInTask = function() {
+			if (_s.anyBlanks([this.workerId, $scope.taskId])) {
+				$rootScope.showMessage("I think missing anything...");
+				return;				
+			}
+			$http.patch(`/teamforce/task/${$scope.taskId}/worker/${this.workerId}`)
+				.then(function(response) {
+					const updateTask = response.data;
+					const index = $scope.tasks
+						.findIndex(function({id}) {
+							return id == updateTask.id;
+						});
+					if (index > -1) {
+						$scope.tasks[index] = updateTask;
+					}
+					$scope.showTaskUser = false;
+					$rootScope.showMessage("Jedi get a task...");
+				})
+				.catch(function(error) {
+					console.error(error);
+					$rootScope.showMessage("Jedi don't get task...");
+				});
 		}
 
 		this.init();

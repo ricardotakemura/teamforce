@@ -1,25 +1,27 @@
 package br.net.ricardotakemura.teamforce.model;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
+import br.net.ricardotakemura.teamforce.model.EntityBean;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "task")
-public class Task {
+public class Task implements EntityBean<Long> {
 	public enum Status {
 		OPEN,
 		WORK,
@@ -59,12 +61,11 @@ public class Task {
 	@Enumerated(EnumType.STRING)
 	private Status status;
 	
-	@ManyToMany(targetEntity = Worker.class, mappedBy = "tasks")
-	private Set<Worker> workers;
-	
-	public Task() {
-		workers = new HashSet<>();
-	}
+	@ManyToOne(targetEntity = Worker.class, 
+			optional = true,
+			cascade = CascadeType.ALL,
+			fetch = FetchType.EAGER)
+	private Worker worker;
 
 	public Long getId() {
 		return id;
@@ -114,12 +115,12 @@ public class Task {
 		this.type = type;
 	}
 
-	public Set<Worker> getWorkers() {
-		return workers;
+	public Worker getWorker() {
+		return worker;
 	}
 
-	public void setWorkers(Set<Worker> workers) {
-		this.workers = workers;
+	public void setWorker(Worker worker) {
+		this.worker = worker;
 	}
 
 	@Override
