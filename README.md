@@ -1,13 +1,13 @@
 # Team Force
 
-##Description
+## Description
 The simple task manager.
 
-##Dependency
+## Dependency
 - Java 8 or above
 - Maven 3.9.6
 
-##Install and run
+## Install and run
 ```shell
 mvn clean wildfly:dev
 ```
