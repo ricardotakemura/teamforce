@@ -48,7 +48,7 @@
         <version.war.plugin>3.4.0</version.war.plugin>
 
         <!-- maven-compiler-plugin -->
-        <maven.compiler.release>11</maven.compiler.release>
+        <maven.compiler.release>8</maven.compiler.release>
     </properties>
 
     <!--
