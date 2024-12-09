@@ -220,6 +220,7 @@ angular.module("controllers", [])
 			this.selectCard.style.position = "absolute";
 			this.selectCard.style.width = `${this.selectWidth}px`;
 			this.selectCard.style.height = `${this.selectHeight}px`;
+			this.selectCard.style.zIndex = 1;
 			const x = event.clientX - this.selectX;
 			this.selectCard.style.left = `${x}px`;
 		}; 
